@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 #   Script to run ranking computations for different graph models.
+#   Usage: ./run_rank.sh <measure>
 #   Author: Matteo Loporchio
 #
 
