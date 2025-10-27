@@ -26,9 +26,6 @@ connectivity: connectivity.o
 degree: degree.o
 	$(CXX) $(CXX_FLAGS) $^ -o $@ $(LD_FLAGS)
 
-hits: hits.o
-	$(CXX) $(CXX_FLAGS) $^ -o $@ $(LD_FLAGS)
-
 pagerank: pagerank.o
 	$(CXX) $(CXX_FLAGS) $^ -o $@ $(LD_FLAGS)
 
