@@ -10,3 +10,4 @@ tg/
 ug/
 unused/
 *.ipynb
+*.tsv
