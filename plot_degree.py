@@ -1,55 +1,58 @@
+"""
+Author: Matteo Loporchio
+"""
+
 import polars as pl
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
+import plot_utils
 
-FONT_SIZE = 14
-
-def set_font_size(ax, font_size):
-    for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] + ax.get_xticklabels() + ax.get_yticklabels()):
-        item.set_fontsize(font_size)
-
-def plot_in_degree_distribution(df: pl.DataFrame, output_file: str, plot_title: str):
+def plot_in_degree_distribution(df: pl.DataFrame, model: str, output_file: str):
     """
     Plot the in-degree distribution of a graph.
     """
+    plot_title = f"{model.upper()} in-degree"
+    color = plot_utils.get_color(model)
     data = df['in_degree'].value_counts().sort('in_degree')
-    plt.figure(figsize=(4, 4))
-    plt.scatter(data['in_degree'], data['count'], color="blue", rasterized=True)
+    plt.figure(figsize=plot_utils.DEFAULT_FIGURE_SIZE)
+    plt.scatter(data['in_degree'], data['count'], color=color, rasterized=True)
     plt.title(plot_title)
-    plt.xlabel("In-Degree")
-    plt.ylabel("Frequency")
+    plt.xlabel("in-degree")
+    plt.ylabel("frequency")
     plt.xscale('symlog')
     plt.yscale('log')
     plt.grid(linestyle='--', linewidth=0.5)
-    set_font_size(plt.gca(), FONT_SIZE)
+    plot_utils.set_font_size(plt.gca())
     plt.savefig(output_file, format='pdf', bbox_inches='tight')
     plt.close()
 
-def plot_out_degree_distribution(df: pl.DataFrame, output_file: str, plot_title: str):
+def plot_out_degree_distribution(df: pl.DataFrame, model: str, output_file: str):
     """
     Plot the out-degree distribution of a graph.
     """
+    plot_title = f"{model.upper()} out-degree"
+    color = plot_utils.get_color(model)
     data = df['out_degree'].value_counts().sort('out_degree')
-    plt.figure(figsize=(4, 4))
-    plt.scatter(data['out_degree'], data['count'], color="blue", rasterized=True)
+    plt.figure(figsize=plot_utils.DEFAULT_FIGURE_SIZE)
+    plt.scatter(data['out_degree'], data['count'], color=color, rasterized=True)
     plt.title(plot_title)
-    plt.xlabel("Out-Degree")
-    plt.ylabel("Frequency")
+    plt.xlabel("out-degree")
+    plt.ylabel("frequency")
     plt.xscale('symlog')
     plt.yscale('log')
     plt.grid(linestyle='--', linewidth=0.5)
-    set_font_size(plt.gca(), FONT_SIZE)
+    plot_utils.set_font_size(plt.gca())
     plt.savefig(output_file, format='pdf', bbox_inches='tight')
     plt.close()
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print(f"Usage: python {sys.argv[0]} <input_file> <output_file> <model_name>")
+        print(f"Usage: python {sys.argv[0]} <input_file> <output_file> <model>")
         sys.exit(1)
     input_file = sys.argv[1]
     output_file = sys.argv[2]
-    model_name = sys.argv[3]
+    model = sys.argv[3]
     df = pl.read_csv(input_file, separator="\t")
-    plot_in_degree_distribution(df, output_file + "_in.pdf", f"{model_name} In-Degree")
-    plot_out_degree_distribution(df, output_file + "_out.pdf", f"{model_name} Out-Degree")
+    plot_in_degree_distribution(df, model, output_file + "_in.pdf")
+    plot_out_degree_distribution(df, model, output_file + "_out.pdf")

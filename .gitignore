@@ -5,6 +5,7 @@ labels/
 log/
 pg/
 rank_transformed/
+test/
 tg/
 ug/
 unused/
