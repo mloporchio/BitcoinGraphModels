@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-#   Script to run ranking computations for different graph models.
+#   This script ranks the nodes of each graph model according to the specified metric.
+#   
 #   Usage: ./run_rank.sh <measure>
 #   Author: Matteo Loporchio
 #
@@ -9,7 +10,7 @@ MEASURE=$1
 MEASURES=("degree" "pagerank" "clustering" "harmonic")
 SIZE=10000 # Number of entries in the final ranking
 MODELS=("ag" "tg" "ug" "atg" "pg") # List of model names
-OUTPUT_DIR="rank" # Output directory where results will be saved
+OUTPUT_DIR="results/rank" # Output directory where results will be saved
 
 # Create output directory if it does not exist.
 mkdir -p ${OUTPUT_DIR}

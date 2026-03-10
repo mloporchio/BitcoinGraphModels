@@ -1,3 +1,15 @@
+"""
+This script ranks the nodes in the given model based on the given metric and saves the result as a TSV file.
+Usage:
+python rank.py <model> <metric> <size> <output_path>
+- model: the graph model to rank (ag, tg, ug, atg, pg)
+- metric: the metric to rank by (degree, pagerank, harmonic)
+- size: the number of top nodes to save (-1 for all)
+- output_path: the directory to save the output TSV file
+
+Author: Matteo Loporchio
+"""
+
 import polars as pl
 import utils
 import sys

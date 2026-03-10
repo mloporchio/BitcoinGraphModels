@@ -2,10 +2,10 @@
 
 MODELS=("tg" "ug" "atg" "pg")
 METRICS=("in_degree" "out_degree" "pagerank" "harmonic")
-SCRIPT_MAP="tau_compute_map.py"
-SCRIPT_SCORES="tau_compute_scores.py"
-SCRIPT_METRIC="tau_compute_metric.py"
-OUTPUT_DIR="test"
+SCRIPT_MAP="tau_map.py"
+SCRIPT_SCORES="tau_scores.py"
+SCRIPT_METRIC="tau_metric.py"
+OUTPUT_DIR="results/tau"
 
 for MODEL in "${MODELS[@]}"; do
     for METRIC in "${METRICS[@]}"; do

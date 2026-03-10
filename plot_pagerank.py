@@ -9,6 +9,7 @@ import sys
 import plot_utils
 
 NUM_BINS = 100
+Y_MAX = 1e9
 
 def plot_pagerank(df: pl.DataFrame, model: str, output_file: str):
     """
@@ -16,6 +17,8 @@ def plot_pagerank(df: pl.DataFrame, model: str, output_file: str):
     """
     plot_title = f"{model.upper()} PageRank"
     color = plot_utils.get_color(model)
+    yfmt = plot_utils.ScalarFormatterForceFormat()
+    yfmt.set_powerlimits((0,0))
     data = df['pagerank']
     plt.figure(figsize=plot_utils.DEFAULT_FIGURE_SIZE)
     plt.hist(data, bins=NUM_BINS, color=color)
@@ -23,9 +26,11 @@ def plot_pagerank(df: pl.DataFrame, model: str, output_file: str):
     plt.xlabel("PageRank")
     plt.ylabel("frequency")
     plt.yscale('log')
-    plt.gca().ticklabel_format(axis='x', style='sci', scilimits=(0, 0))
+    plt.gca().xaxis.set_major_formatter(yfmt)
+    plt.xticks(ha='left', rotation=90)
+    plt.ylim(top = Y_MAX)
     plt.grid(linestyle='--', linewidth=0.5)
-    plot_utils.set_font_size(plt.gca())
+    plt.gca().xaxis.get_offset_text().set_fontsize(plot_utils.DEFAULT_OFFSET_FONT_SIZE)
     plt.savefig(output_file, format='pdf', bbox_inches='tight')
     plt.close()
 

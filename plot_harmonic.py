@@ -9,23 +9,30 @@ import sys
 import plot_utils
 
 NUM_BINS = 100
+Y_MIN = 1
+Y_MAX = 1e8
 
 def plot_harmonic(df: pl.DataFrame, model: str, output_file: str):
     """
     Plot the distribution of the harmonic centrality.
     """
-    plot_title = f"{model.upper()} harm. centrality"
+    plot_title = f"{model.upper()} harm. cent."
     color = plot_utils.get_color(model)
+    yfmt = plot_utils.ScalarFormatterForceFormat()
+    yfmt.set_powerlimits((0,0))
     data = df['harmonic']
     plt.figure(figsize=plot_utils.DEFAULT_FIGURE_SIZE)
     plt.hist(data, bins=NUM_BINS, color=color)
     plt.title(plot_title)
-    plt.xlabel("harm. centrality")
+    plt.xlabel("harm. cent.")
     plt.ylabel("frequency")
     plt.yscale('log')
-    plt.gca().ticklabel_format(axis='x', style='sci', scilimits=(0, 0))
+    plt.gca().xaxis.set_major_formatter(yfmt)
+    plt.xticks(ha='left', rotation=90)
+    plt.ylim(bottom = Y_MIN, top = Y_MAX)
+    plt.yticks([1e1, 1e3, 1e5, 1e7])
     plt.grid(linestyle='--', linewidth=0.5)
-    plot_utils.set_font_size(plt.gca())
+    plt.gca().xaxis.get_offset_text().set_fontsize(plot_utils.DEFAULT_OFFSET_FONT_SIZE)
     plt.savefig(output_file, format='pdf', bbox_inches='tight')
     plt.close()
 
