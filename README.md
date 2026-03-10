@@ -9,7 +9,7 @@ The paper is currently under review and the code is provided here for reproducib
 
 For space reasons, the data used for the experiments is not included in this repository. However, such data can be obtained from the following Zenodo repository: 
 
-https://zenodo.org/record/XXXXXXX
+https://doi.org/10.5281/zenodo.18938800 
 
 Please note that all downloaded data should be placed in the `data` folder of the repository and decompressed.
 
