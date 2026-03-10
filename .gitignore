@@ -6,18 +6,16 @@ atg/graph
 atg/*.parquet
 atg/*.tsv
 bin/
+data/*.csv
 data/*.tsv
 data/*.xz
-labels/
 pg/graph
 pg/*.parquet
 pg/*.tsv
-rank_transformed/
 results/rank/
 results/tau/
 results/*.tsv
 obj/
-test/
 tmp/
 tg/graph
 tg/*.parquet
@@ -26,3 +24,4 @@ ug/graph
 ug/*.parquet
 ug/*.tsv
 unused/
+upload.sh
