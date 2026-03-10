@@ -16,9 +16,10 @@ BUILD_OUT="build_out.log"
 BUILD_ERR="build_err.log"
 GRAPH_OUT="graph_out.log"
 GRAPH_ERR="graph_err.log"
+CLASSPATH="../bin"
 
 # Build the edge list.
-java -Xmx200g ${EDGE_LIST_BUILDER} ${INPUT_FILE} ${EL_FILE} 1>${BUILD_OUT} 2>${BUILD_ERR}
+java -cp "${CLASSPATH}" -Xmx200g ${EDGE_LIST_BUILDER} ${INPUT_FILE} ${EL_FILE} 1>${BUILD_OUT} 2>${BUILD_ERR}
 
 # Sort the edge list.
 mkdir -p ${TMP_DIR}

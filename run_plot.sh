@@ -1,6 +1,11 @@
 #!/bin/bash
 # 
 #   This script processes data for various models and generates plots.
+#   The script accepts an experiment name as an argument 
+#   (namely one of "connectivity", "degree", "pagerank", "harmonic") 
+#   which determines the type of plot to generate.
+#   
+#   The generated plots are saved in the 'figures' directory and then archived into a tarball.
 #   
 #   Author: Matteo Loporchio
 #
@@ -44,5 +49,5 @@ if [[ $EXPERIMENT == "degree" || $EXPERIMENT == "connectivity" ]]; then
 else
     tar czf ${TARBALL_FILE} ${FIGURES_DIR}/*_${EXPERIMENT}.pdf
 fi
-rm ${FIGURES_DIR}/*_${EXPERIMENT}*.pdf
+#rm ${FIGURES_DIR}/*_${EXPERIMENT}*.pdf
 echo "Figures were archived in ${TARBALL_FILE}."

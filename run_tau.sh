@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+#   This script computes the Weighted Kendall's tau correlation coefficient for all models and metrics.
+#   The results are saved in the 'results/tau' directory.
+#   
+#   Author: Matteo Loporchio
+#
 
 MODELS=("tg" "ug" "atg" "pg")
 METRICS=("in_degree" "out_degree" "pagerank" "harmonic")
@@ -6,6 +12,8 @@ SCRIPT_MAP="tau_map.py"
 SCRIPT_SCORES="tau_scores.py"
 SCRIPT_METRIC="tau_metric.py"
 OUTPUT_DIR="results/tau"
+
+mkdir -p "${OUTPUT_DIR}"
 
 for MODEL in "${MODELS[@]}"; do
     for METRIC in "${METRICS[@]}"; do

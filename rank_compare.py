@@ -1,3 +1,7 @@
+"""
+Author: Matteo Loporchio
+"""
+
 import polars as pl
 import utils
 import sys

@@ -5,6 +5,7 @@ ag/*.tsv
 atg/graph
 atg/*.parquet
 atg/*.tsv
+bin/
 data/*.tsv
 data/*.xz
 labels/
@@ -12,13 +13,15 @@ pg/graph
 pg/*.parquet
 pg/*.tsv
 rank_transformed/
-results/
+results/rank/
+results/tau/
+results/*.tsv
+obj/
 test/
 tmp/
 tg/graph
 tg/*.parquet
 tg/*.tsv
-ug/BitcoinAddressClustering/
 ug/graph
 ug/*.parquet
 ug/*.tsv

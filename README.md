@@ -7,24 +7,26 @@ The paper is currently under review and the code is provided here for reproducib
 
 ## Data availability
 
-For space reasons, the data used for the experiments is not included in this repository. However, the data can be obtained from the following Zenodo repository. 
+For space reasons, the data used for the experiments is not included in this repository. However, such data can be obtained from the following Zenodo repository: 
 
 https://zenodo.org/record/XXXXXXX
 
-Downloaded data should be placed in the `data` folder and decompressed.
+Please note that all downloaded data should be placed in the `data` folder of the repository and decompressed.
 
 ## Technologies used
 
-- Java
-- C++
-- Python
+For the data analysis process, we used the following languages and libraries:
+
 - Bash
-- igraph (https://igraph.org/)
-- WebGraph (https://webgraph.di.unimi.it/)
-- Polars
-- Matplotlib
-- Scipy
-- Numpy
+- C++
+    - igraph (https://igraph.org/) 
+- Java
+    - WebGraph (https://webgraph.di.unimi.it/)
+- Python 
+    - Matplotlib (https://matplotlib.org/)
+    - Numpy (https://numpy.org/)
+    - Polars (https://pola.rs/)
+    - Scipy (https://scipy.org/)
 
 ## Funding
 

@@ -6,25 +6,52 @@
 CXX=g++
 CXX_FLAGS=-O3 --std=c++11 -I /data/matteoL/igraph/include/igraph
 LD_FLAGS=-L /data/matteoL/igraph/lib -ligraph -fopenmp
+JC=javac
+SRC_DIR=src
+OBJ_DIR=obj
+BIN_DIR=bin
+CLUST_MODULE=BitcoinAddressClustering
 
-.PHONY: clean
+# Create output directories
+$(shell mkdir -p $(OBJ_DIR) $(OBJ_DIR)/$(CLUST_MODULE) $(BIN_DIR) $(BIN_DIR)/$(CLUST_MODULE))
 
-%.o: %.cpp
-	$(CXX) $(CXX_FLAGS) -c $^
+.PHONY: classes clean all
 
-connectivity: connectivity.o
+classes:
+	$(JC) -d $(BIN_DIR) $(SRC_DIR)/*.java
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(CXX) $(CXX_FLAGS) -c $< -o $@
+
+$(BIN_DIR)/connectivity: $(OBJ_DIR)/connectivity.o
 	$(CXX) $(CXX_FLAGS) $^ -o $@ $(LD_FLAGS)
 
-degree: degree.o
+$(BIN_DIR)/degree: $(OBJ_DIR)/degree.o
 	$(CXX) $(CXX_FLAGS) $^ -o $@ $(LD_FLAGS)
 
-pagerank: pagerank.o
+$(BIN_DIR)/pagerank: $(OBJ_DIR)/pagerank.o
 	$(CXX) $(CXX_FLAGS) $^ -o $@ $(LD_FLAGS)
 
-pagerank_dag: pagerank_dag.o
+$(BIN_DIR)/pagerank_dag: $(OBJ_DIR)/pagerank_dag.o
 	$(CXX) $(CXX_FLAGS) $^ -o $@ $(LD_FLAGS)
 
-all: connectivity degree pagerank pagerank_dag
+# Rules for building the clustering module
+$(OBJ_DIR)/$(CLUST_MODULE)/%.o: $(SRC_DIR)/$(CLUST_MODULE)/%.cpp
+	$(CXX) $(CXX_FLAGS) -c $< -o $@
+
+$(BIN_DIR)/$(CLUST_MODULE)/builder: $(OBJ_DIR)/$(CLUST_MODULE)/builder.o
+	$(CXX) $(CXX_FLAGS) $^ -o $@ $(LD_FLAGS)
+
+$(BIN_DIR)/$(CLUST_MODULE)/clustering: $(OBJ_DIR)/$(CLUST_MODULE)/clustering.o
+	$(CXX) $(CXX_FLAGS) $^ -o $@ $(LD_FLAGS)
+
+all: $(BIN_DIR)/connectivity \
+	$(BIN_DIR)/degree \
+	$(BIN_DIR)/pagerank \
+	$(BIN_DIR)/pagerank_dag \
+	$(BIN_DIR)/$(CLUST_MODULE)/builder \
+	$(BIN_DIR)/$(CLUST_MODULE)/clustering \
+	classes
 
 clean:
-	$(RM) *.o connectivity degree pagerank pagerank_dag
+	$(RM) -rf $(OBJ_DIR) $(BIN_DIR)

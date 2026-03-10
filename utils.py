@@ -7,12 +7,12 @@ import polars as pl
 
 TXOUT_FILE = "data/tx_outputs.tsv"
 TXIN_FILE = "data/tx_inputs.tsv"
-COMP_FILE = "ug/BitcoinAddressClustering/comp.csv"
+COMP_FILE = "ug/comp.csv"
 PAYMENT_MAP_FILE = "pg/nm.tsv"
-MAP_ADDRESS_ID_FILE = "./data/addr_id_map.csv"
-MAP_TXHASH_ID_FILE = "./data/txhash_id_map.csv"
-MAP_ADDRESS_LABEL_FILE = "labels/address_labels.tsv"
-MAP_USER_LABEL_FILE = "labels/comp_labels.json"
+MAP_ADDRESS_ID_FILE = "data/addr_id_map.csv"
+MAP_TXHASH_ID_FILE = "data/txhash_id_map.csv"
+MAP_ADDRESS_LABEL_FILE = "data/address_labels.tsv"
+MAP_USER_LABEL_FILE = "data/comp_labels.json"
 NUM_UNIQUE_ADDR = 293798168
 MODELS = ["ag", "tg", "ug", "atg", "pg"]
 METRICS = ["in_degree", "out_degree", "clustering", "pagerank", "harmonic"]

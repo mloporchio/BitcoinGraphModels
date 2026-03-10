@@ -1,13 +1,12 @@
 """
-
-
+Author: Matteo Loporchio
 """
 
 import polars as pl
 import sys
 
 ADDRESS_GRAPH_EDGE_LIST = sys.argv[1] #'../ag/el.tsv'
-CLUSTER_MAP_FILE = sys.argv[2] #'./BitcoinAddressClustering/comp.csv'
+CLUSTER_MAP_FILE = sys.argv[2] #'./comp.csv'
 OUTPUT_FILE = sys.argv[3] #'./el.tsv'
 
 el = pl.read_csv(ADDRESS_GRAPH_EDGE_LIST, separator='\t', has_header=False, new_columns=['src', 'dst'])

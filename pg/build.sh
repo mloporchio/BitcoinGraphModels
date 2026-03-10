@@ -12,9 +12,10 @@ TMP_DIR="tmp"
 EDGE_LIST_BUILDER="PaymentGraphEdgeListBuilder"
 WEBGRAPH_BUILDER="../jar/WebgraphBuilder.jar"
 OUTPUT_PREFIX="graph/pg"
+CLASSPATH="../bin"
 
 # Parse the input file and create the edge list.
-java -Xmx200g ${EDGE_LIST_BUILDER} ${INPUT_FILE} ${NM_FILE} ${EL_FILE} 1>elb_output.log 2>elb_errors.log
+java -cp "${CLASSPATH}" -Xmx200g ${EDGE_LIST_BUILDER} ${INPUT_FILE} ${NM_FILE} ${EL_FILE} 1>elb_output.log 2>elb_errors.log
 
 # Sort the TSV edge list.
 mkdir -p ${TMP_DIR}

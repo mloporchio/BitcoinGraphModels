@@ -6,25 +6,25 @@
 #   Author: Matteo Loporchio
 #
 
-MEASURE=$1
-MEASURES=("degree" "pagerank" "clustering" "harmonic")
+METRIC=$1
+METRICS=("degree" "pagerank" "clustering" "harmonic")
 SIZE=10000 # Number of entries in the final ranking
 MODELS=("ag" "tg" "ug" "atg" "pg") # List of model names
 OUTPUT_DIR="results/rank" # Output directory where results will be saved
+RANK_SCRIPT="rank.py" # Python script that performs the ranking for a given model and metric
 
 # Create output directory if it does not exist.
 mkdir -p ${OUTPUT_DIR}
 
-# Check if the provided measure is valid.
-if [[ ! " ${MEASURES[@]} " =~ " ${MEASURE} " ]]; then
-    echo "Error: Invalid measure '${MEASURE}'. Valid options are: ${MEASURES[*]}"
+# Check if the provided metric is valid.
+if [[ ! " ${METRICS[@]} " =~ " ${METRIC} " ]]; then
+    echo "Error: Invalid metric '${METRIC}'. Valid options are: ${METRICS[*]}"
     exit 1
 fi
 
 for i in "${!MODELS[@]}"; do
     MODEL=${MODELS[$i]}
     echo "Processing ${MODEL}..."
-    SCRIPT_NAME="rank_${MODEL}_${MEASURE}.py"
-    python3 ${SCRIPT_NAME} ${SIZE} ${OUTPUT_DIR}
+    python3 ${RANK_SCRIPT} ${MODEL} ${METRIC} ${SIZE} ${OUTPUT_DIR}
     echo "Done!"
 done
