@@ -6,7 +6,6 @@ Authors: Matteo Loporchio
 import polars as pl
 
 TXOUT_FILE = "data/tx_outputs.tsv"
-TXIN_FILE = "data/tx_inputs.tsv"
 COMP_FILE = "ug/comp.csv"
 PAYMENT_MAP_FILE = "pg/nm.tsv"
 MAP_ADDRESS_ID_FILE = "data/addr_id_map.csv"
@@ -15,7 +14,7 @@ MAP_ADDRESS_LABEL_FILE = "data/address_labels.tsv"
 MAP_USER_LABEL_FILE = "data/comp_labels.json"
 NUM_UNIQUE_ADDR = 293798168
 MODELS = ["ag", "tg", "ug", "atg", "pg"]
-METRICS = ["in_degree", "out_degree", "clustering", "pagerank", "harmonic"]
+METRICS = ["in_degree", "out_degree", "pagerank", "harmonic"]
 
 def get_node_type(model):
     if model == "ag":
