@@ -54,7 +54,7 @@ def rank(model, metric):
                          .with_columns(node_type = pl.lit("ADDRESS"))) # address, node_id
         txhash_id_df = (utils.load_map_txhash_id(columns=["entity", "node_id"])
                         .with_columns(node_type = pl.lit("TX"), 
-                                      node_id = pl.col("node_id") + utils.NUM_UNIQUE_ADDR)) # tx_hash, node_id
+                                      node_id = pl.col("node_id") + utils.get_num_unique_addr())) # tx_hash, node_id
         df_map = pl.concat([address_id_df, txhash_id_df]).join(address_label_df, on="entity", how="left") # entity, node_id, node_type, label
         result = (metric_df.sort(metric, descending=True)
                   .join(df_map, on='node_id', how='left')

@@ -1,6 +1,6 @@
 """
-Utility functions.
-Authors: Matteo Loporchio
+This script contains utility functions for loading data.
+Author: Matteo Loporchio
 """
 
 import polars as pl
@@ -12,9 +12,19 @@ MAP_ADDRESS_ID_FILE = "data/addr_id_map.csv"
 MAP_TXHASH_ID_FILE = "data/txhash_id_map.csv"
 MAP_ADDRESS_LABEL_FILE = "data/address_labels.tsv"
 MAP_USER_LABEL_FILE = "data/comp_labels.json"
-NUM_UNIQUE_ADDR = 293798168
+AG_PROPERTIES_FILE = "ag/graph/ag.properties"
 MODELS = ["ag", "tg", "ug", "atg", "pg"]
 METRICS = ["in_degree", "out_degree", "pagerank", "harmonic"]
+
+def get_num_unique_addr():
+    """
+    Reads the number of unique addresses from the Address Graph properties file.
+    """
+    with open(AG_PROPERTIES_FILE, "r") as f:
+        for line in f:
+            if line.startswith("nodes="):
+                return int(line.strip().split("=")[1])
+    raise RuntimeError(f"Error: Could not find nodes in {AG_PROPERTIES_FILE}")
 
 def get_node_type(model):
     if model == "ag":

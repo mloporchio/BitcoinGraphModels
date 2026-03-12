@@ -47,12 +47,13 @@ def atg_to_ag(metric):
     """
     """
     assert metric in utils.METRICS
+    num_unique_addr = utils.get_num_unique_addr()
     # First half of the result is node_id mapped to itself (address -> address).
-    address_id_space = range(0, utils.NUM_UNIQUE_ADDR)
+    address_id_space = range(0, num_unique_addr)
     res_1 = pl.DataFrame({'node_id' : address_id_space, 'address_id' : address_id_space})
     # Second half of the result is transaction node_id mapped to address_id via tx_outputs.
     res_2 = (tg_to_ag(metric).rename({"tx_id":"node_id"})
-             .sort("node_id").with_columns(pl.col("node_id") + utils.NUM_UNIQUE_ADDR))
+             .sort("node_id").with_columns(pl.col("node_id") + num_unique_addr))
     return pl.concat([res_1, res_2])
 
 def pg_to_ag(metric):
